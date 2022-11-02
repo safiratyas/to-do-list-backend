@@ -126,5 +126,18 @@ module.exports = {
         message: err.message
       })
     }
+  },
+
+  async getAllUsers(req, res) {
+    const getAll = await usersService.listByCondition({
+      attributes: {
+        exclude: ["password"]
+      }
+    })
+
+    res.status(200).json({
+      status: "Success",
+      data: getAll
+    })
   }
 }
