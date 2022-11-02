@@ -85,5 +85,22 @@ module.exports = {
         message: err.message
       })
     }
+  },
+
+  async whoAmI(req, res) {
+    try {
+      res.status(200).json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email,
+        createdAt: req.user.createdAt,
+        updatedAt: req.user.updatedAt
+      })
+    } catch (err) {
+      res.status(404).json({
+        status: "Failed",
+        message: err.message
+      })
+    }
   }
 }

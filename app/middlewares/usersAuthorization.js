@@ -21,7 +21,6 @@ module.exports = {
       )
 
       req.user = await usersService.get(tokenPayload.id)
-      console.log(req.user)
 
       next()
     } catch (err) {
