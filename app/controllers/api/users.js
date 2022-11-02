@@ -102,5 +102,29 @@ module.exports = {
         message: err.message
       })
     }
+  },
+
+  async getUser(req, res) {
+    try {
+      const user = await usersService.getOne({
+        where: {
+          id: req.params.id
+        },
+        attributes: {
+          exclude: ["password"]
+        }
+      })
+
+      if(!user) {
+        throw new Error(`User with ID ${req.params.id} is not found!`)
+      }
+
+      res.status(200).json(user)
+    } catch (err) {
+      res.status(404).json({
+        status: "Failed",
+        message: err.message
+      })
+    }
   }
 }

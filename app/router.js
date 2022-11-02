@@ -24,5 +24,10 @@ apiRouter.get("/api/who-am-i",
   controllers.api.users.whoAmI
 );
 
+apiRouter.get("/api/users/:id",
+  middlewares.userAuthorization.authorize,
+  controllers.api.users.getUser
+);
+
 apiRouter.use(controllers.api.application.handleNotFound);
 module.exports = apiRouter;
