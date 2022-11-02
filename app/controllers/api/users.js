@@ -25,7 +25,61 @@ module.exports = {
         updatedAt: user.updatedAt
       })
 
-    } catch(err) {
+    } catch (err) {
+      res.status(400).json({
+        status: "Failed",
+        message: err.message
+      })
+    }
+  },
+
+  async login(req, res) {
+    try {
+      const email = req.body.email.toLowerCase()
+      const password = req.body.password
+
+      const user = await usersService.getOne({
+        where: {
+          email
+        }
+      })
+
+      if (!user) {
+        res.status(404).json({
+          status: "Failed",
+          message: "Email Not Found!"
+        })
+        return
+      }
+
+      const isPasswordCorrect = await checkPassword(password, user.password)
+
+      if (!isPasswordCorrect) {
+        res.status(401).json({
+          status: "Failed",
+          message: "Wrong Password!"
+        })
+        return
+      }
+
+      const token = createToken({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      }, process.env.JWT_PRIVATE_KEY || "Token", {
+        expiresIn: "1d"
+      })
+
+      res.status(201).json({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        token,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+      })
+
+    } catch (err) {
       res.status(400).json({
         status: "Failed",
         message: err.message

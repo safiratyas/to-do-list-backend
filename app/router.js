@@ -15,5 +15,9 @@ apiRouter.post("/api/users/register",
   controllers.api.users.register
 );
 
+apiRouter.post("/api/users/login",
+  controllers.api.users.login
+);
+
 apiRouter.use(controllers.api.application.handleNotFound);
 module.exports = apiRouter;
