@@ -47,6 +47,11 @@ apiRouter.get("/api/users",
  controllers.api.lists.createList
 );
 
+apiRouter.put("/api/lists/:id",
+middlewares.userAuthorization.authorize,
+controllers.api.lists.updateList
+);
+
 /**
  * @API Documentation
  */

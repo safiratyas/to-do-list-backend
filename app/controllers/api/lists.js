@@ -25,5 +25,29 @@ module.exports = {
         message: err.message
       })
     }
+  },
+
+  async updateList(req, res) {
+    try {
+      const {
+        name, 
+        date
+      } = req.body
+
+      const list = await listsService.update(req.params.id, {
+        name,
+        date
+      })
+
+      res.status(200).json({
+        status: "OK",
+        message: "Successfully edited list"
+      })
+    } catch (err) {
+      res.status(422).json({
+        status: "Failed",
+        message: err.message
+      })
+    }
   }
 }
