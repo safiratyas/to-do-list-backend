@@ -5,7 +5,6 @@ module.exports = {
     try {
       const {
         name, 
-        date
       } = req.body;
 
       const list = await listsService.create({
@@ -76,14 +75,15 @@ module.exports = {
 
   async getList(req, res) {
     try {
-      const list = await listsService.getOne({
+      const list = await listsService.listByCondition({
         where: {
-          id: req.params.id
+          userId: req.user.id
         },
       })
+      console.log(list)
 
       if(!list) {
-        throw new Error(`List with ID ${req.params.id} is not found!`)
+        throw new Error(`List with ID ${req.user.id} is not found!`)
       }
 
       res.status(200).json(list)
