@@ -8,7 +8,6 @@ module.exports = {
         date
       } = req.body;
 
-      console.log(req.body)
       const list = await listsService.create({
         userId: req.user.id,
         name: req.body.name,
