@@ -60,6 +60,7 @@ module.exports = {
         }
       })
 
+      const destroy = await listsService.delete(id)
       res.status(200).json({
         status: "OK",
         message: "Successfully deleted list"

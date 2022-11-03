@@ -16,7 +16,7 @@ const {
     },
 
     delete(id) {
-      return Patients.destroy({
+      return Lists.destroy({
         where: {
           id
         }
