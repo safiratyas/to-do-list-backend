@@ -3,21 +3,21 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Users extends Model {
+  class Lists extends Model {
     static associate(models) {
-      this.hasMany(models.Lists, {
+      this.belongsTo(models.Users, {
         foreignKey: 'userId',
         as: 'user'
       })
     }
   }
-  Users.init({
+  Lists.init({
     name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING
+    date: DataTypes.DATEONLY,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'Lists',
   });
-  return Users;
+  return Lists;
 };
