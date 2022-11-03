@@ -6,6 +6,10 @@ const apiRouter = express.Router();
 
 apiRouter.get("/", controllers.api.application.getRoot);
 
+// configure and initialization swagger
+const swaggerUI = require('swagger-ui-express');
+const swaggerDocument = require('../config/swagger.json');
+
 /**
  * @User Resources 
  */
@@ -33,6 +37,13 @@ apiRouter.get("/api/users",
   middlewares.userAuthorization.authorize,
   controllers.api.users.getAllUsers
 );
+
+/**
+ * @API Documentation
+ */
+
+ apiRouter.get('/documentation.json', (req, res) => res.send(swaggerDocument));
+ apiRouter.use('/documentation', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 apiRouter.use(controllers.api.application.handleNotFound);
 module.exports = apiRouter;
