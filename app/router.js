@@ -39,6 +39,15 @@ apiRouter.get("/api/users",
 );
 
 /**
+ * @List Resources 
+ */
+
+ apiRouter.post("/api/lists",
+ middlewares.userAuthorization.authorize,
+ controllers.api.lists.createList
+);
+
+/**
  * @API Documentation
  */
 
