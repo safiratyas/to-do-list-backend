@@ -52,6 +52,11 @@ middlewares.userAuthorization.authorize,
 controllers.api.lists.updateList
 );
 
+apiRouter.delete("/api/lists/:id",
+middlewares.userAuthorization.authorize,
+controllers.api.lists.deleteList
+);
+
 /**
  * @API Documentation
  */
