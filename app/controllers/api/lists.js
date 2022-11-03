@@ -72,5 +72,35 @@ module.exports = {
         }
       })
     }
+  },
+
+  async getList(req, res) {
+    try {
+      const list = await listsService.getOne({
+        where: {
+          id: req.params.id
+        },
+      })
+
+      if(!list) {
+        throw new Error(`List with ID ${req.params.id} is not found!`)
+      }
+
+      res.status(200).json(list)
+    } catch (err) {
+      res.status(404).json({
+        status: "Failed",
+        message: err.message
+      })
+    }
+  },
+
+  async getAllLists(req, res) {
+    const getAll = await listsService.listByCondition()
+
+    res.status(200).json({
+      status: "Success",
+      data: getAll
+    })
   }
 }

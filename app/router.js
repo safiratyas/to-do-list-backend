@@ -47,14 +47,24 @@ apiRouter.get("/api/users",
  controllers.api.lists.createList
 );
 
-apiRouter.put("/api/lists/:id",
+apiRouter.put("/api/lists/:id/detail",
 middlewares.userAuthorization.authorize,
 controllers.api.lists.updateList
 );
 
-apiRouter.delete("/api/lists/:id",
+apiRouter.delete("/api/destroy/:id",
 middlewares.userAuthorization.authorize,
 controllers.api.lists.deleteList
+);
+
+apiRouter.get("/api/lists/:id",
+  middlewares.userAuthorization.authorize,
+  controllers.api.lists.getList
+);
+
+apiRouter.get("/api/all-lists",
+  middlewares.userAuthorization.authorize,
+  controllers.api.lists.getAllLists
 );
 
 /**

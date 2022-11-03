@@ -16,7 +16,7 @@ module.exports = {
   async listByCondition(condition) {
     try {
       const users = await listsRepository.findAll(condition)
-      const usersCount = await listsRepository.getTotalUsers()
+      const usersCount = await listsRepository.getTotalLists()
 
       return {
         data: users,
